@@ -5,7 +5,12 @@ os.environ["TRANSFORMERS_CACHE"] = cache_path
 os.environ["HF_HUB_CACHE"] = cache_path
 os.environ["HF_HOME"] = cache_path
 from PIL import Image
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers import (
+    StableDiffusionControlNetPipeline, 
+    ControlNetModel, 
+    StableDiffusionXLControlNetPipeline, 
+    EulerAncestralDiscreteScheduler,
+)
 from diffusers.utils import make_image_grid, load_image
 from transformers import AutoImageProcessor
 import torch
@@ -13,22 +18,27 @@ import cv2  # for Canny edge detection
 
 
 # Define paths and settings
-controlnet_model_id = "lllyasviel/sd-controlnet-canny"
+# Controlnet model size must match the text-to-image model 
+# controlnet_model_id = "lllyasviel/sd-controlnet-canny"
+controlnet_model_id = "diffusers/controlnet-canny-sdxl-1.0"
 model_id = "SG161222/RealVisXL_V4.0"
 output_dir = "GM_Internal_Workshop/images"
 os.makedirs(output_dir, exist_ok=True)
 
 # Load ControlNet model
 controlnet = ControlNetModel.from_pretrained(controlnet_model_id, torch_dtype=torch.float16)
-pipe = StableDiffusionControlNetPipeline.from_pretrained(
+pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
     model_id,
     controlnet=controlnet,
     torch_dtype=torch.float16
 )
+
+#changing the default scheduler
+# pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
 pipe = pipe.to("cuda")
 
 # Prepare Canny edge detection input
-input_image_path = "GM_Internal_Workshop\images\pavilions.png"  # Replace with your image path
+input_image_path = "GM_Internal_Workshop/images/rhino_capture.jpg"  # Replace with your image path
 image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
 low_threshold = 100
 high_threshold = 200
@@ -44,20 +54,24 @@ prompt = (
 )
 negative_prompt = "low res, bad quality"
 
+seed = 58964
+generator = torch.Generator("cuda").manual_seed(seed)
+
 # Generate image with ControlNet
 generated_image = pipe(
     prompt=prompt,
     negative_prompt=negative_prompt,
     image=edges_pil,
     guidance_scale=5,
-    num_inference_steps=25,
+    num_inference_steps=12,
     height=1024,
     width=1024,
-    controlnet_conditioning_scale = 0.8,
+    controlnet_conditioning_scale = 0.6,
+    generator = generator,
 ).images[0]
 
 # Save the generated image
-output_image_path = f"{output_dir}/generated_image_6.png"
+output_image_path = f"{output_dir}/generated_image_11.png"
 generated_image.save(output_image_path)
 generated_image.show()
 image_grid = make_image_grid([edges_pil, generated_image], rows=1, cols=2)

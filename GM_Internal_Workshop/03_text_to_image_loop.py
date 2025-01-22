@@ -6,18 +6,18 @@ os.environ["TRANSFORMERS_CACHE"] = cache_path
 os.environ["HF_HUB_CACHE"] = cache_path
 os.environ["HF_HOME"] = cache_path
 from pathlib import Path
-from diffusers import DiffusionPipeline
+from diffusers import StableDiffusionXLPipeline
 import torch
 from PIL import Image
 import numpy as np
 
 # Create an output folder for images
-output_folder = Path("GM_Internal_Workshop/images/steps")
+output_folder = Path("GM_Internal_Workshop/images/steps_02")
 output_folder.mkdir(parents=True, exist_ok=True)
 
 # Load the model
 model_id = "SG161222/RealVisXL_V4.0"
-pipe = DiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
+pipe = StableDiffusionXLPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
 pipe = pipe.to("cuda")  # Move to GPU
 
 # Define the prompt

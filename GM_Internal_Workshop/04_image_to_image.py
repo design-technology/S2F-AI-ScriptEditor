@@ -4,7 +4,7 @@ os.environ["TRANSFORMERS_CACHE"] = cache_path
 os.environ["HF_HUB_CACHE"] = cache_path
 os.environ["HF_HOME"] = cache_path
 
-from diffusers import AutoPipelineForImage2Image
+from diffusers import StableDiffusionImg2ImgPipeline
 from diffusers.utils import make_image_grid, load_image
 import torch
 
@@ -12,13 +12,10 @@ import torch
 # https://huggingface.co/docs/diffusers/en/api/pipelines/stable_diffusion/text2img
 
 # Load the model
-CompVis = "CompVis/stable-diffusion-v1-4"
-sdlegacy = "sd-legacy/stable-diffusion-v1-5"
-crynuxai = "crynux-ai/stable-diffusion-v1-5"
 RealVisXL = "SG161222/RealVisXL_V4.0"
 
 model_id = RealVisXL
-pipe = AutoPipelineForImage2Image.from_pretrained(model_id, torch_dtype=torch.float16)
+pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
 pipe = pipe.to("cuda")  # Move to GPU
 
 # Define the prompt
