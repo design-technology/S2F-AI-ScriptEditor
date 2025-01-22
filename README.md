@@ -1,4 +1,4 @@
-![[assets/readme_images/STF-AI-03.png]]
+![alt text](assets/readme_images/STF-AI-03.png)
 
 Documentation file for basic AI image generation tasks using the auto [stable diffusion pipeline](https://huggingface.co/docs/diffusers/en/api/pipelines/stable_diffusion/overview)
 
@@ -32,7 +32,8 @@ add this part at the beginning of your code to change the directory of all the d
 
 ## **03-Choosing a model:**
 
-![[assets/readme_images/AI-models.png]]
+![alt text](assets/readme_images/AI-models.png)
+
 https://huggingface.co/models?pipeline_tag=text-to-image&sort=downloads
 
 When selecting a model from Hugging Face, consider the following factors to ensure it meets your requirements:
@@ -94,7 +95,7 @@ StableDiffusionPipelineOutput(images=<PIL.Image.Image image mode=RGB size=512x51
  `output_image = pipe(prompt).images` = List = [PIL object](https://pillow.readthedocs.io/en/stable/)
 <PIL.Image.Image image mode=RGB size=512x512 at 0x24224FF9E20>
 
-![[assets/readme_images/AI-render.png]]
+![alt text](assets/readme_images/AI-render.png)
 ## **07-Adjusting model parameters:**
 
 Text-to-image calling parameters [reference](https://huggingface.co/docs/diffusers/en/api/pipelines/stable_diffusion/text2img#diffusers.StableDiffusionPipeline.__call__)
@@ -130,7 +131,7 @@ Text-to-image calling parameters [reference](https://huggingface.co/docs/diffuse
 
 #### **A-Assigning the Right Scheduler to a Pipeline**
 
-![[assets/readme_images/scheduler-cats.png]]
+![alt text](assets/readme_images/scheduler-cats.png)
 Schedulers define how latent noise is reduced during the image generation process, directly impacting the quality, speed, and style of the output. 
 https://www.kaggle.com/code/aisuko/schedulers-performance
 https://github.com/huggingface/diffusers/pull/5541
