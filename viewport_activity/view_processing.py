@@ -21,6 +21,7 @@ def capture_viewport():
     
     # use Rhino's command to capture the viewport to a file
     rs.Command(f'_-ViewCaptureToFile "{temp_file}" _Enter', False)
+    # sc.doc.Views.ActiveView.CaptureToBitmap()
     
     # load the image with PIL
     pil_image = Image.open(temp_file)

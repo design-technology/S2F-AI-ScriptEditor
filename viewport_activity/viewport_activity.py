@@ -1,9 +1,12 @@
 import Rhino
 import scriptcontext as sc
+
+Rhino.Display.RhinoView.Modified += event_handler
 # subscribing to any event within the rhino viewport
 # The CalculateBoundingBox event is part of Rhino's display pipeline and fires whenever Rhino needs to recalculate what's visible in the viewport
 class ViewportMonitor:
     def __init__(self):
+
         # Register event handlers
         Rhino.Display.DisplayPipeline.CalculateBoundingBox += self.on_viewport_changed
         self.Enabled = True
