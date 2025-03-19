@@ -1,6 +1,22 @@
 import os
+import locale
+locale.setlocale(locale.LC_ALL, 'en_US')
+print(locale.getlocale())
+
+import os
+import os.path as op
+import sys
+
+
+# Path to the Conda environment
+CONDA_ENV = r'C:\conda\envs\generative_ai'
+
+# Add site-packages and DLL directories
+sys.path.append(op.join(CONDA_ENV, r"Lib\site-packages"))
+os.add_dll_directory(op.join(CONDA_ENV, r'Library\bin'))
+
 # Set cache path for Hugging Face models
-cache_path = 'Z:\\Development Projects\\huggingface'
+cache_path = 'C:\huggingface'
 os.environ["TRANSFORMERS_CACHE"] = cache_path
 os.environ["HF_HUB_CACHE"] = cache_path
 os.environ["HF_HOME"] = cache_path
@@ -17,20 +33,19 @@ import cv2  # for Canny edge detection
 # controlnet_model_id = "lllyasviel/sd-controlnet-canny"
 controlnet_model_id = "diffusers/controlnet-canny-sdxl-1.0"
 model_id = "SG161222/RealVisXL_V4.0"
-output_dir = "GM_Internal_Workshop/images"
+output_dir = "C:\\Users\\vr_service\\source\\repos\\design-technology\\S2F-AI-ScriptEditor\\GM_Internal_Workshop\\images"
 os.makedirs(output_dir, exist_ok=True)
 
 # Load ControlNet model
-controlnet = ControlNetModel.from_pretrained(controlnet_model_id, torch_dtype=torch.float16)
+controlnet = ControlNetModel.from_pretrained(controlnet_model_id)
 pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
     model_id,
-    controlnet=controlnet,
-    torch_dtype=torch.float16
+    controlnet=controlnet
 )
 pipe = pipe.to("cuda")
 
 # Prepare Canny edge detection input
-input_image_path = "GM_Internal_Workshop/images/rhino_capture.jpg"  # Replace with your image path
+input_image_path = "C:\\Users\\vr_service\\source\\repos\\design-technology\\S2F-AI-ScriptEditor\\GM_Internal_Workshop\\images\\edges_input.png"  # Replace with your image path
 image = cv2.imread(input_image_path, cv2.IMREAD_GRAYSCALE)
 low_threshold = 100
 high_threshold = 200
