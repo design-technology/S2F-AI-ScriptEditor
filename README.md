@@ -19,6 +19,7 @@ Documentation file for basic AI image generation tasks using the auto [stable di
 	- pip install accelerate
 	- pip install transformers 
 	- pip install opencv-python
+    - pip install pyOpenSSL
 
 
 ## **02-Huggingface caching:**
