@@ -1,8 +1,24 @@
+import locale
+locale.setlocale(locale.LC_ALL, 'en_US')
+print(locale.getlocale())
+
 import os
 cache_path = 'Z:\\Development Projects\\huggingface'
 os.environ["TRANSFORMERS_CACHE"] = cache_path
 os.environ["HF_HUB_CACHE"] = cache_path
 os.environ["HF_HOME"] = cache_path
+import sys
+import os.path as op
+
+
+
+# Path to the Conda environment
+CONDA_ENV = r'C:\Users\Hesham.Shawqy\anaconda3\envs\generative_ai'
+
+# # Add site-packages and DLL directories
+sys.path.append(op.join(CONDA_ENV, r"Lib\site-packages"))
+os.add_dll_directory(op.join(CONDA_ENV, r'Library\bin'))
+
 
 from diffusers import StableDiffusionPipeline
 import torch
@@ -20,5 +36,5 @@ prompt = "a stunning view of a cluster of modular pavilions nestled within the l
 image = pipe(prompt).images[0]
 
 # Save the image
-image.save(f"test.png")
+image.save(f"Z:\\Development Projects\\test.png")
 image.show()
