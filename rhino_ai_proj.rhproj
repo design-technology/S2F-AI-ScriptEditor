@@ -1,0 +1,51 @@
+{
+  "host": {
+    "name": "Rhino3D",
+    "version": "8.17.25066\u002B7001",
+    "os": "windows",
+    "arch": "x64"
+  },
+  "id": "261b1548-61a9-4c9a-bb1f-a393607d473c",
+  "identity": {
+    "name": "rhino_ai_proj",
+    "version": "0.1",
+    "publisher": {
+      "email": "hesham.shawqy@grimshaw.global",
+      "name": "Author"
+    }
+  },
+  "settings": {
+    "buildPath": "build/",
+    "buildTarget": {
+      "host": {
+        "name": "Rhino3D",
+        "version": "8"
+      },
+      "title": "Rhino3D (8.*)",
+      "slug": "rh8"
+    },
+    "publishTarget": {
+      "title": "McNeel Yak Server"
+    }
+  },
+  "codes": [
+    {
+      "id": "90d18a8b-b0db-4c13-b14c-48a6cad2ec37",
+      "language": {
+        "id": "mcneel.pythonnet.python",
+        "version": "3.9.10"
+      },
+      "title": "view_processing_eto_forms",
+      "uri": "rhino_view_ai_parameters/view_processing_eto_forms.py"
+    },
+    {
+      "id": "71b69a0e-265f-4f85-af84-1fe7f20974c4",
+      "language": {
+        "id": "mcneel.pythonnet.python",
+        "version": "3.9.10"
+      },
+      "title": "image_generation",
+      "uri": "rhino_view_ai_parameters/image_generation.py"
+    }
+  ]
+}
