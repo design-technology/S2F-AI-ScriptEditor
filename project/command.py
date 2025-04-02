@@ -1,5 +1,4 @@
 #! python 3
-# flag: python.reloadEngine
 
 import scriptcontext as sc
 

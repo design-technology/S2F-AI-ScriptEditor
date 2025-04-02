@@ -75,7 +75,7 @@ class RenderView(ef.Dialog):
         self.save_button.Click += click_to_save
 
         table_layout = ef.DynamicLayout()
-        table_layout.Width = 240
+        table_layout.MinimumSize = ed.Size(120, -1)
         table_layout.Spacing = ed.Size(6, 4)
         
         title = ef.Label()
@@ -85,6 +85,9 @@ class RenderView(ef.Dialog):
         ## --- Properties
         
         table_layout.Add(title, True, False)
+
+        table_layout.BeginScrollable(ef.BorderType.NONE, None, None, True, False)
+        table_layout.BeginVertical()
 
         controls = [
             ("Model",           self.drop_down,             "Some models are faster and some are better than others"),
@@ -121,6 +124,9 @@ class RenderView(ef.Dialog):
             table_layout.Add(control_data[1], True, False)
 
         table_layout.AddSpace(True, True)
+
+        table_layout.EndScrollable()
+        table_layout.EndVertical()
         
         self.tab_layout = ef.TabControl()
         self.tab_layout.Width = 520
@@ -154,11 +160,11 @@ class RenderView(ef.Dialog):
             bitmap = sc.doc.Views.ActiveView.CaptureToBitmap(Size(512,512), False, False, False)
             self.set_viewport_image(EtoExtensions.ToEto(bitmap))
             
+            pipe.set_model(self.get_model())
             pil_image = pipe.generate_image(bitmap,
                                             self.get_seed(),
                                             self.get_prompt(),
                                             self.get_negative_prompt(),
-                                            self.get_model(),
                                             self.get_steps(),
                                             0.75)
             if pil_image is None:
