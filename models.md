@@ -2,7 +2,6 @@
 
 Documentation file for basic AI image generation tasks using the auto [stable diffusion pipeline](https://huggingface.co/docs/diffusers/en/api/pipelines/stable_diffusion/overview)
 
-# Step-by-step guide to run AI models locally:
 
 # AI Models:
 ## **03-Choosing a model:**
