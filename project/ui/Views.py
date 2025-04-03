@@ -181,6 +181,19 @@ class RenderView(ef.Dialog):
 
         self.Shown += set_viewport
 
+        def on_close(sender, args):
+            self.dispose()
+
+        self.Closed += on_close
+
+    
+    def dispose(self):
+        try:
+            if self.pipe:
+                self.pipe.dispose()
+        except:
+            pass
+
     def get_seed(self):
         return self.seed_prompt_box.Value
 

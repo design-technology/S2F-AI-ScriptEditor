@@ -80,6 +80,8 @@ class RenderPipe:
     def set_model(self, model_id: str):
         if self.model_id == model_id:
             return
+
+        self.dispose()
         
         self.model_id = model_id
         self.pipe = self.get_pipe()
@@ -122,3 +124,19 @@ class RenderPipe:
         byte_array_net = Array[Byte](byte_array)  # Convert to .NET Byte[]
 
         return ed.Bitmap(byte_array_net)
+    
+    def dispose(self):
+        try:
+            if self.pipe == None:
+                return
+            
+            print("Disposing the pipeline...")
+            del self.pipe  # Delete the pipeline object
+            self.pipe = None  # Reset reference
+
+            # Clear GPU memory if using CUDA
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            
+        except:
+            pass
