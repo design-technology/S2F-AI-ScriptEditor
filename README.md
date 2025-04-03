@@ -17,6 +17,7 @@ Documentation file for basic AI image generation tasks using the auto [stable di
 https://www.anaconda.com/download/success
 
 Make sure you enable this option during the installation:
+
 ![alt text](assets/readme_images/anaconda.png)
 
 ## **01-Prepare a conda environment for the app:**
