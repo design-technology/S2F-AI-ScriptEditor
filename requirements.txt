@@ -1,0 +1,10 @@
+diffusers
+accelerate
+transformers
+opencv-python
+pyOpenSSL
+
+# Mac Only
+torch; sys_platform == 'darwin'
+torchvision; sys_platform == 'darwin'
+torchaudio; sys_platform == 'darwin'
