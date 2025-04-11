@@ -37,7 +37,7 @@ Make sure you enable this option during the installation:
     - pip install pyOpenSSL
     - pip install controlnet_aux
     - pip install pillow
-    - pip install mediaplayer
+    - pip install mediapipe
     - pip install numpy
     - pip install timm
 
