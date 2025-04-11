@@ -7,6 +7,8 @@ Documentation file for basic AI image generation tasks using the auto [stable di
 # Prerequisites:
 ## Install cuda 12.6 (only for Windows uers):**
 
+- **check cuda version:**
+nvidia-smi
 - **Install cuda 12.6:**
     - windows 11: 
     https://developer.nvidia.com/cuda-12-6-0-download-archive?target_os=Windows&target_arch=x86_64&target_version=11&target_type=exe_local
