@@ -42,6 +42,7 @@ Make sure you enable this option during the installation:
     - pip install mediapipe
     - pip install numpy
     - pip install timm
+    - pip install SSL
 	One line to download all the libraries: 
     - pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126 && pip install diffusers accelerate transformers opencv-python pyOpenSSL controlnet_aux pillow mediapipe numpy timm
 
