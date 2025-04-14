@@ -13,11 +13,17 @@ from diffusers.utils import make_image_grid, load_image
 from transformers import AutoImageProcessor
 import torch
 import cv2  # for Canny edge detection
-
+from huggingface_hub import hf_hub_download
 
 # Define paths and settings
 controlnet_model_id = "xinsir/controlnet-canny-sdxl-1.0"
 model_id = "SG161222/RealVisXL_V4.0"
+# lora link
+repo_name = "ByteDance/Hyper-SD"
+ckpt_name = "Hyper-SDXL-8steps-lora.safetensors"
+# Setup LoRA weights
+lora_path = hf_hub_download(repo_name, ckpt_name)
+
 output_dir = "0-Assets/output"
 os.makedirs(output_dir, exist_ok=True)
 
@@ -28,6 +34,11 @@ pipe = StableDiffusionXLControlNetPipeline.from_pretrained(
     controlnet=controlnet,
     torch_dtype=torch.float16
 )
+
+
+pipe.load_lora_weights(lora_path)
+pipe.fuse_lora(lora_scale=0.125)
+
 
 # define device
 if torch.cuda.is_available():
@@ -60,21 +71,23 @@ prompt = (
 )
 negative_prompt = "low res, bad quality"
 
+seed = 58964
+generator = torch.Generator(device).manual_seed(seed)
+
 # Generate image with ControlNet
 generated_image = pipe(
     prompt=prompt,
     negative_prompt=negative_prompt,
     image=edges_pil,
     guidance_scale=5,
-    num_inference_steps=25,
+    num_inference_steps=8,
     height=1024,
     width=1024,
     controlnet_conditioning_scale = 0.6,
+    generator = generator,
 ).images[0]
 
 # Save the generated image
-output_image_path = f"{output_dir}/generated_image_1.png"
+output_image_path = f"{output_dir}/generated_image_2.png"
 generated_image.save(output_image_path)
 generated_image.show()
-image_grid = make_image_grid([edges_pil, generated_image], rows=1, cols=2)
-image_grid.show()

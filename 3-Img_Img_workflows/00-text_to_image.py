@@ -15,6 +15,7 @@ model_id = "SG161222/RealVisXL_V4.0"
 # dtype, Model Instantiation dtype, for memory optimization.Normally gets instantiated with torch.float32 format
 pipe = StableDiffusionXLPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
 # Move to GPU
+device = "cuda"
 pipe = pipe.to("cuda")
 # speed up inference
 pipe.enable_model_cpu_offload()
