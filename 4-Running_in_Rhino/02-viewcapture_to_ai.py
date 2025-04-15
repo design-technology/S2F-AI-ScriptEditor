@@ -16,7 +16,7 @@ import Eto.Drawing as ed
 import Eto.Forms as ef
 
 from Rhino import RhinoApp
-from Rhino.UI import EtoExtensions
+from Rhino.UI import EtoExtensions, RhinoEtoApp
 
 # Set the Python executable
 import torch.multiprocessing as mp
@@ -144,7 +144,7 @@ class RenderPipe:
             pass
 
 if __name__ == "__main__":
-    model = "SG161222/RealVisXL_V4.0"
+    model = "stabilityai/sd-turbo"
     pipe = RenderPipe(False, model)
     
     bitmap = sc.doc.Views.ActiveView.CaptureToBitmap(sd.Size(512,512), False, False, False)
@@ -159,7 +159,10 @@ if __name__ == "__main__":
         eto_image = pipe.pil_to_bitmap(pil_image)
 
         sfd = ef.SaveFileDialog()
-        if sfd.ShowDialog() == ef.DialogResult.Ok:
+
+        parent = RhinoEtoApp.MainWindowForDocument(sc.doc)
+        result = sfd.ShowDialog(parent)
+        if result == ef.DialogResult.Ok:
             eto_image.Save(sfd.FileName, ed.ImageFormat.Png)
 
     except:
