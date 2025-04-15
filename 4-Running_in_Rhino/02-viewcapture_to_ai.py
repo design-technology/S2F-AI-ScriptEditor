@@ -144,20 +144,23 @@ class RenderPipe:
             pass
 
 if __name__ == "__main__":
-    pipe = RenderPipe(False, "SG161222/RealVisXL_V4.0")
+    model = "SG161222/RealVisXL_V4.0"
+    pipe = RenderPipe(False, model)
     
     bitmap = sc.doc.Views.ActiveView.CaptureToBitmap(sd.Size(512,512), False, False, False)
 
     prompt = "a stunning view of a cluster of modular pavilions nestled within the lush Brazilian jungle the roof is built using woven bamboo elements surrounded by majestic mountains rising in the background and a serene river flowing in the foreground the trees are way taller than the pavilions earthy tones that blend harmoniously with the yellowish greens of the surrounding jungle volumetric sunlight goes across the jungle creating fascinating light rays 4k high resolution realistic render architectural visualization"
     negative_prompt = "Low Quality"
     
-    pil_image = pipe.generate_image(bitmap, 500, prompt, negative_prompt, 25, 0.75)
-    if pil_image is not None:
+    pipe.set_model(model)
+    pil_image = pipe.generate_image(bitmap, 200, prompt, negative_prompt, 25, 0.75)
+    
+    try:
         eto_image = pipe.pil_to_bitmap(pil_image)
 
         sfd = ef.SaveFileDialog()
         if sfd.ShowDialog() == ef.DialogResult.Ok:
             eto_image.Save(sfd.FileName, ed.ImageFormat.Png)
 
-    else:
+    except:
         print("Error!")
