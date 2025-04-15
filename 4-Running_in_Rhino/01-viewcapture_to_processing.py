@@ -1,8 +1,4 @@
 import io
-import os
-
-import torch
-from diffusers import StableDiffusionImg2ImgPipeline, OnnxStableDiffusionPipeline
 
 from PIL import Image
 import scriptcontext as sc
@@ -13,15 +9,8 @@ import System.Drawing as sd
 from System import Array, Byte
 
 import Eto.Drawing as ed
-import Eto.Forms as ef
 
-from Rhino import RhinoApp
-from Rhino.UI import EtoExtensions
-
-prompt = "a stunning view of a cluster of modular pavilions nestled within the lush Brazilian jungle the roof is built using woven bamboo elements surrounded by majestic mountains rising in the background and a serene river flowing in the foreground the trees are way taller than the pavilions earthy tones that blend harmoniously with the yellowish greens of the surrounding jungle volumetric sunlight goes across the jungle creating fascinating light rays 4k high resolution realistic render architectural visualization"
-negative_prompt = "Low Quality"
-
-def bitmap_to_pil(self, bitmap: sd.Bitmap) -> Image.Image:
+def bitmap_to_pil(bitmap: sd.Bitmap) -> Image.Image:
     net_stream = MemoryStream()
     
     bitmap.Save(net_stream, sdi.ImageFormat.Png)
@@ -31,7 +20,7 @@ def bitmap_to_pil(self, bitmap: sd.Bitmap) -> Image.Image:
 
     return pil_image.convert("RGB")
     
-def pil_to_bitmap(self, pil_image: Image.Image) -> ed.Bitmap:
+def pil_to_bitmap(pil_image: Image.Image) -> ed.Bitmap:
     if pil_image is None:
         return None
     
