@@ -48,6 +48,9 @@ nvidia-smi
 
 
 ``` py
+import sys
+import os.path as op
+
 import locale 
 locale.setlocale(locale.LC_ALL,"en_US")
 print(locale.getlocale())
