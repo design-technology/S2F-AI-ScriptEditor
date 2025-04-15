@@ -47,13 +47,15 @@ nvidia-smi
     - pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126 && pip install diffusers accelerate transformers opencv-python pyOpenSSL controlnet_aux pillow mediapipe numpy timm peft
 
 
+``` py
 import locale 
 locale.setlocale(locale.LC_ALL,"en_US")
 print(locale.getlocale())
 
-CONDA_ENV = r'C:\Users\Hesham.Shawqy\AppData\Local\anaconda3\envs\generative_ai'
+CONDA_ENV = r'<your-anaconda-environment>'
 sys.path.append(op.join(CONDA_ENV, r"Lib\site-packages"))
 os.add_dll_directory(op.join(CONDA_ENV, r'Library\bin'))
+```
 
 ## **02-Huggingface caching:**
 
