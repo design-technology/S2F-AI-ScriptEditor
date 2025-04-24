@@ -1,0 +1,54 @@
+{
+  "host": {
+    "name": "Rhino3D",
+    "version": "8.17.25066\u002B7001",
+    "os": "windows",
+    "arch": "x64"
+  },
+  "id": "ac184454-f4a0-4839-9d81-833d164928fa",
+  "identity": {
+    "name": "Rhino_viewport_ai",
+    "version": "0.1",
+    "publisher": {
+      "email": "hesham.shawqy@grimshaw.global",
+      "name": "Author"
+    }
+  },
+  "settings": {
+    "buildPath": "build/",
+    "buildTarget": {
+      "host": {
+        "name": "Rhino3D",
+        "version": "8"
+      },
+      "title": "Rhino3D (8.*)",
+      "slug": "rh8"
+    },
+    "publishTarget": {
+      "title": "McNeel Yak Server"
+    }
+  },
+  "codes": [
+    {
+      "id": "36cd6f1b-48b2-4b9e-9ff4-ef6c8f1b7189",
+      "language": {
+        "id": "mcneel.pythonnet.python",
+        "version": "3.9.10"
+      },
+      "title": "app",
+      "uri": "app.py"
+    }
+  ],
+  "libraries": [
+    {
+      "type": "uri",
+      "library": {
+        "base": "image_generation/",
+        "language": {
+          "id": "*.*.python",
+          "version": "3.*.*"
+        }
+      }
+    }
+  ]
+}
